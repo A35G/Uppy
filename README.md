@@ -20,6 +20,7 @@ Features
 
 - **To complete**:
 	- [ ] Check the file size through settings or server limits;
-	- [ ] Get response in json or text.
+	- [ ] Get response in json or text;
+	- [ ] Localize class.
 
 Any suggestion, comment or advice, is welcome.
