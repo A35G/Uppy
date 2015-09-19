@@ -1,7 +1,24 @@
 <?php
 
+	/**
+	 * Set true to check file dimension
+	 * Default: true
+	 */
 	define("check_max_dim", true);
+
+	/**
+	 * Set locale for result message from upload
+	 * Default: it
+	 */
 	define("default_lang", "it");
+
+	/**
+	 * Type of result message from upload
+	 * -	txt
+	 * -	json
+	 * Default: json
+	 */
+	define("txt_response", "json");
 
 	$init_upl = array(
 		'Images' => array(

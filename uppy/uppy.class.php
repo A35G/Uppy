@@ -151,13 +151,13 @@
 
 				$tmp_file = $cmp_f["tmp_name"];
 
-				//	Dimension File
+				//	Size of file
 				$sfile = $cmp_f["size"];
 
-				//	Type file - Can be falsified - Untrusted
+				//	Type of file - Can be falsified - Untrusted
 				$firstc = $cmp_f["type"];
 
-		    //  Type file - Is currently the most reliable
+		    //  Type of file - Is currently the most reliable
 		    if (function_exists('finfo_file')) {
 
 		      $finfo = finfo_open();
@@ -232,11 +232,16 @@
 
 				}
 
-    /*if($_FILES['file']['size'] > 10485760) { //10 MB (size is also in bytes)
-        // File too big
-    } else {
-        // File within size restrictions
-    }*/
+    		if (defined("check_max_dim") && (check_max_dim)) {
+
+   				if($cmp_f['size'] > 10485760) { //10 MB (size is also in bytes)
+
+			      $this->brind++;
+			      return "Dimensione del file oltre il limite imposto";
+
+					}
+
+				}
 
 				//	Directory for upload
 				//$dir_up = $this->url_r.$info_file[$tipo_upl]['directory'];
