@@ -17,6 +17,8 @@ Features
 	- [x] Check file by MIMETypes whitelist;
 	- [x] Get Size Limit by Server;
 	- [x] Check if the file exists; if the file exists, overwrite or upload the file with another name;
+	- [x] Check if is possible to use CHMOD function;
+	- [x] Create first demo page.
 
 - **To complete**:
 	- [ ] Check the file size through settings or server limits;

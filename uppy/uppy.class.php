@@ -143,6 +143,21 @@
 
     }
 
+    public function checkPerms() {
+
+    	if (!chmod(realpath(dirname(__FILE)), 0777)) {
+
+    		return "Disabled";
+
+    	} else {
+
+    		@chmod(realpath(dirname(__FILE)), 0755);
+    		return "Enabled";
+
+    	}
+
+    }
+
 		public function up_file_img($cmp_f, $info_file, $tipo_upl) {
 
 			if (isset($cmp_f) && !empty($cmp_f["name"])) {
@@ -234,25 +249,27 @@
 
     		if (defined("check_max_dim") && (check_max_dim)) {
 
-   				if($cmp_f['size'] > 10485760) { //10 MB (size is also in bytes)
+    			if (isset($info_file[$tipo_upl]['maxSize']) && !empty($info_file[$tipo_upl]['maxSize'])) {
 
-			      $this->brind++;
-			      return "Dimensione del file oltre il limite imposto";
+	   				if($cmp_f['size'] > 10485760) { //10 MB (size is also in bytes)
+
+				      $this->brind++;
+				      return "Dimensione del file oltre il limite imposto";
+
+						}
 
 					}
 
 				}
 
 				//	Directory for upload
-				//$dir_up = $this->url_r.$info_file[$tipo_upl]['directory'];
-				//$dir_up = $info_file[$tipo_upl]['directory'];
 				$dir_up = realpath(dirname(__FILE__)).$this->getPth(1).$info_file[$tipo_upl]['directory'];
-				//echo realpath(dirname(__FILE__)).$this->getPth(1).$info_file[$tipo_upl]['directory'];
+//return $dir_up;
 				//	Check if exists directory for upload
 				if (!is_dir($dir_up)) {
 
 					$this->brind++;
-					return $dir_up."Cartella per l'upload non presente sul server";
+					return /*$dir_up.*/"Cartella per l'upload non presente sul server";
 
 				}
 
