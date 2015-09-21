@@ -48,6 +48,7 @@
 			<div id='chkdata'>
 				<span>Max size file: &nbsp; <b><?php echo $basco->getMaxDim(); ?></b></span>
 				<span>CHMOD: &nbsp; <b><?php echo $basco->checkPerms(); ?></b></span>
+				<span>Folder permission: &nbsp; <b><?php echo $basco->getPerms(realpath(dirname(__FILE__))); ?></b> (<i><u>octal value</u></i>)</span>
 			</div>
 			<div class='clearfix'></div>
 		</div>

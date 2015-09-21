@@ -158,6 +158,13 @@
 
     }
 
+    public function getPerms($dir) {
+
+    	if (is_dir($dir))
+    		return substr(sprintf('%o', fileperms($dir)), -4);
+
+    }
+
 		public function up_file_img($cmp_f, $info_file, $tipo_upl) {
 
 			if (isset($cmp_f) && !empty($cmp_f["name"])) {
