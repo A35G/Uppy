@@ -18,11 +18,12 @@ Features
 	- [x] Get Size Limit by Server;
 	- [x] Check if the file exists; if the file exists, overwrite or upload the file with another name;
 	- [x] Check if is possible to use CHMOD function;
-	- [x] Create first demo page.
+	- [x] Create first demo page;
+	- [x] Check the file size through settings or server limits;
 
 - **To complete**:
-	- [ ] Check the file size through settings or server limits;
+
 	- [ ] Get response in json or text;
-	- [ ] Localize response text.
+	- [ ] Localize response text (now only it language).
 
 Any suggestion, comment or advice, is welcome.

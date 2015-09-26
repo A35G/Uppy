@@ -24,7 +24,7 @@
 		'Images' => array(
 			'url' => 'up_img/',
 			'directory' => '../up_img/',
-			'maxSize' => 0,
+			'maxSize' => 2097152, //	2MB
 			'allowedExtensions' => 'bmp,gif,jpeg,jpg,jpe,png',
 			'allowedMIMETypes' => 'image/jpeg,image/png,image/bmp,image/gif',
 			'deniedExtensions' => ''
@@ -32,7 +32,7 @@
 		'Files' => array(
 			'url' => 'up_files/',
 			'directory' => '../up_files/',
-			'maxSize' => 0,
+			'maxSize' => 2097152, //	2MB
 			'allowedExtensions' => 'pdf,doc,docx',
 			'allowedMIMETypes' => 'application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/download,application/force-download',
 			'deniedExtensions' => ''
