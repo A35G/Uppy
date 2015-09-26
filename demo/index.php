@@ -38,7 +38,7 @@
 			<div id='fdata'>
 				<form name='frmEdit' action="<?php echo sprintf("http://%s%s", $_SERVER['SERVER_NAME'], $_SERVER['REQUEST_URI']); ?>?act=to_upload" method='POST' enctype='multipart/form-data'>
 					<input type="hidden" name="MAX_FILE_SIZE" value="<?php echo $val_dm; ?>" />
-					<label>Seleziona File:</label>
+					<label><?php echo $basco->parse_lang('sel_file'); ?>:</label>
 					<input type='file' name='upl_files' id='upl_files' class='allego' /> <input type='submit' name='modifa' value='Carica' />
 				</form>
 			</div>
@@ -46,9 +46,10 @@
 				<?php echo $result; ?>
 			</div>
 			<div id='chkdata'>
-				<span>Max size file: &nbsp; <b><?php echo $basco->getMaxDim(); ?></b></span>
+				<span><?php echo $basco->parse_lang('max_size'); ?>: &nbsp; <b><?php echo $basco->getMaxDim(); ?></b></span>
 				<span>CHMOD: &nbsp; <b><?php echo $basco->checkPerms(); ?></b></span>
-				<span>Folder permission: &nbsp; <b><?php echo $basco->getPerms(realpath(dirname(__FILE__))); ?></b> (<i><u>octal value</u></i>)</span>
+				<span><?php echo $basco->parse_lang('perm_file'); ?>: &nbsp; <b><?php echo $basco->getPerms(realpath(dirname(__FILE__))); ?></b> (<i><u><?php echo $basco->parse_lang('oct_val'); ?></u></i>)</span>
+				<span>Fileinfo: &nbsp; <?php echo $basco->checkFinfo(); ?></span>
 			</div>
 			<div class='clearfix'></div>
 		</div>

@@ -9,12 +9,34 @@
 		var $brind = 0;
 		var $txt_d;
 		var $d_lang;
+		var $lng_data;
 
 		function __construct() {
 
 			$this->txt_d = "";
 
+      // Browser Lang
+      $this->d_lang = isset($_SERVER['HTTP_ACCEPT_LANGUAGE']) ? substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2) : NULL;
+
+      if ($this->d_lang === NULL || empty($this->d_lang))
+        $this->d_lang = (defined("default_lang") && (default_lang)) ? default_lang : "it";
+
+      $this->getLocale();
+
 		}
+
+    protected function getLocale() {
+
+      if (($this->d_lang != NULL) && @file_exists(dirname(__FILE__)."/locale/".$this->d_lang.".php")) {
+
+        @include(dirname(__FILE__)."/locale/".$this->d_lang.".php");
+        $this->lng_data = $up_lang;
+
+      }
+
+      return $this->lng_data;
+
+    }
 
 		private function genRandName() {
 
@@ -54,7 +76,7 @@
 
 				} else {
 
-					throw new Exception("Failed to normalize memory size '{$size}' (unknown format)");
+					throw new Exception(sprintf($this->parse_lang('not_chg_dim'), $size));
 
 				}
 
@@ -121,18 +143,11 @@
 
     public function parse_lang($text_l) {
 
-			if (defined("default_lang") && (default_lang)) {
+			if (isset($this->lng_data) && is_array($this->lng_data) && !empty($this->lng_data)) {
 
-				if (file_exists(dirname(__FILE__)."/locale/".default_lang.".php"))
-					include(dirname(__FILE__)."/locale/".default_lang.".php");
+	      if (array_key_exists($text_l, $this->lng_data)) {
 
-			}
-
-			if (isset($up_lang) && is_array($up_lang) && !empty($up_lang)) {
-
-	      if (array_key_exists($text_l, $up_lang)) {
-
-	        $mosy = str_ireplace($text_l, $up_lang[$text_l], $text_l, $count);
+	        $mosy = str_ireplace($text_l, $this->lng_data[$text_l], $text_l, $count);
 
 	        if ($count > 0)
 	        	return $mosy;
@@ -147,14 +162,16 @@
 
     	if (!chmod(realpath(dirname(__FILE)), 0777)) {
 
-    		return "Disabled";
+    		$prs_text = $this->parse_lang("not_enabled");
 
     	} else {
 
     		@chmod(realpath(dirname(__FILE)), 0755);
-    		return "Enabled";
+    		$prs_text = $this->parse_lang("enabled");
 
     	}
+
+    	return $prs_text;
 
     }
 
@@ -162,6 +179,17 @@
 
     	if (is_dir($dir))
     		return substr(sprintf('%o', fileperms($dir)), -4);
+
+    }
+
+    public function checkFinfo() {
+
+    	if (!function_exists("finfo_file"))
+    		$dvar = sprintf("<b>%s</b><br /><i>%s</i> - %s", $this->parse_lang("not_enabled"), $this->parse_lang("finfo_advise"), $this->parse_lang("finfo_php_version"));
+			else
+    		$dvar = sprintf("<b>%s</b>", $this->parse_lang("enabled"));
+
+    	return $dvar;
 
     }
 
@@ -201,7 +229,7 @@
 				if ($unext != $original_extension) {
 
 					$this->brind++;
-					return "Estensioni non corrispondenti";
+					return $this->parse_lang('ext_diff');
 
 				}
 
@@ -221,7 +249,7 @@
 					if (in_array($unext, $file_ext) === FALSE) {
 
 						$this->brind++;
-						return "Estensione del file non permessa";
+						return $this->parse_lang('ext_not');
 
 					}
 
@@ -248,7 +276,7 @@
 			    if ($err_mimet == 2) {
 
 			      $this->brind++;
-			      return "Tipologia di file non permessa";
+			      return $this->parse_lang('mime_not');
 
 			    }
 
@@ -261,7 +289,7 @@
 	   				if($cmp_f['size'] > 10485760) { //10 MB (size is also in bytes)
 
 				      $this->brind++;
-				      return "Dimensione del file oltre il limite imposto";
+				      return $this->parse_lang('size_big');
 
 						}
 
@@ -276,7 +304,7 @@
 				if (!is_dir($dir_up)) {
 
 					$this->brind++;
-					return /*$dir_up.*/"Cartella per l'upload non presente sul server";
+					return /*$dir_up.*/$this->parse_lang('dir_not');
 
 				}
 
@@ -331,13 +359,13 @@
 				}
 
 				if (($cmp_f['error'] != UPLOAD_ERR_NO_FILE) && empty($this->brind) && file_exists($dir_up.$nfile))
-					return "File caricato con successo";
+					return $this->parse_lang('upl_succ');
 				else
-					return "Errore durante l'upload del file";
+					return $this->parse_lang('upl_err');
 
 			} else {
 
-				return "Campo File vuoto";
+				return $this->parse_lang('emp_field');
 
 			}
 
