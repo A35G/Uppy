@@ -20,10 +20,11 @@ Features
 	- [x] Check if is possible to use CHMOD function;
 	- [x] Create first demo page;
 	- [x] Check the file size through settings or server limits;
+	- [x] Localize response text (currently only: it - en).
 
 - **To complete**:
 
-	- [ ] Get response in json or text;
-	- [ ] Localize response text (now only it language).
+	- [ ] Get response in json or text;.
+	- [ ] Clean code.
 
 Any suggestion, comment or advice, is welcome.
