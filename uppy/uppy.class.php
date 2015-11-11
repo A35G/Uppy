@@ -5,7 +5,7 @@
 
 	class UpFiles {
 
-		var $url_r = Site_Root;
+		//var $url_r = Site_Root;
 		var $brind = 0;
 		var $txt_d;
 		var $d_lang;
@@ -142,13 +142,13 @@
 
 		public function checkPerms() {
 
-			if (!chmod(realpath(dirname(__FILE)), 0777)) {
+			if (!chmod(realpath(dirname(__FILE__)), 0777)) {
 
 				$prs_text = $this->parse_lang("not_enabled");
 
 			} else {
 
-				@chmod(realpath(dirname(__FILE)), 0755);
+				@chmod(realpath(dirname(__FILE__)), 0755);
 				$prs_text = $this->parse_lang("enabled");
 
 			}

@@ -50,6 +50,7 @@
 				<span>CHMOD: &nbsp; <b><?php echo $basco->checkPerms(); ?></b></span>
 				<span><?php echo $basco->parse_lang('perm_file'); ?>: &nbsp; <b><?php echo $basco->getPerms(realpath(dirname(__FILE__))); ?></b> (<i><u><?php echo $basco->parse_lang('oct_val'); ?></u></i>)</span>
 				<span>Fileinfo: &nbsp; <?php echo $basco->checkFinfo(); ?></span>
+				<span><?php echo $basco->parse_lang('php_vers'); ?>: &nbsp; <b><?php echo phpversion(); ?></b></span>
 			</div>
 			<div class='clearfix'></div>
 		</div>

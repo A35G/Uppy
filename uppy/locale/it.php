@@ -17,5 +17,6 @@
 		"upl_err" => "Errore durante l'upload del file",
 		"upl_succ" => "File caricato con successo",
 		"not_chg_dim" => "Impossibile normalizzare la dimensione della memoria '%s' (formato sconosciuto)",
-		"size_big" => "Dimensione del file oltre il limite imposto"
+		"size_big" => "Dimensione del file oltre il limite imposto",
+		"php_vers" => "Versione di PHP in uso"
 	);
